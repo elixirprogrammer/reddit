@@ -26,6 +26,16 @@ config :logger, :console,
 # Use Jason for JSON parsing in Phoenix
 config :phoenix, :json_library, Jason
 
+config :reddit, :pow,
+  user: Reddit.Users.User,
+  repo: Reddit.Repo,
+  web_module: RedditWeb,
+  extensions: [PowResetPassword, PowPersistentSession],
+  controller_callbacks: Pow.Extension.Phoenix.ControllerCallbacks,
+  messages_backend: RedditWeb.Pow.Messages,
+  mailer_backend: Reddit.Pow.Mailer,
+  web_mailer_module: RedditWeb
+
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
 import_config "#{Mix.env()}.exs"

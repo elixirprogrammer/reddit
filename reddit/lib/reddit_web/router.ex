@@ -1,5 +1,8 @@
 defmodule RedditWeb.Router do
   use RedditWeb, :router
+  use Pow.Phoenix.Router
+  use Pow.Extension.Phoenix.Router,
+    extensions: [PowResetPassword]
 
   pipeline :browser do
     plug :accepts, ["html"]
@@ -14,10 +17,38 @@ defmodule RedditWeb.Router do
     plug :accepts, ["json"]
   end
 
+  pipeline :protected do
+    plug Pow.Plug.RequireAuthenticated,
+      error_handler: Pow.Phoenix.PlugErrorHandler
+  end
+
+  pipeline :not_authenticated do
+    plug Pow.Plug.RequireNotAuthenticated,
+      error_handler: RedditWeb.AuthErrorHandler
+  end
+
   scope "/", RedditWeb do
     pipe_through :browser
 
     live "/", PageLive, :index
+  end
+
+  scope "/" do
+    pipe_through :browser
+
+    pow_routes()
+    pow_extension_routes()
+  end
+
+  scope "/", RedditWeb do
+    pipe_through [:browser, :not_authenticated]
+
+  end
+
+  scope "/", RedditWeb do
+    pipe_through [:browser, :protected]
+    # Add your protected routes here
+
   end
 
   # Other scopes may use custom stacks.
