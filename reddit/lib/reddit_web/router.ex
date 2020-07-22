@@ -30,7 +30,7 @@ defmodule RedditWeb.Router do
   scope "/", RedditWeb do
     pipe_through :browser
 
-    live "/", PageLive, :index
+    get "/", PageController, :index
   end
 
   scope "/" do
