@@ -1,0 +1,95 @@
+<section class="bg-light">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12 pt-4">
+        <div class="row">
+          <div class="col">
+            <p class="h5">Popular Posts</p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-8">
+            <div class="card p-3 mb-3">
+              <div class="row">
+                <div class="col-1 text-center">
+                  <div id="vote-actions-1" class="vote" data-id="1">
+                    <div class="fa fa-arrow-up upvote"></div>
+                    <span class="font-weight-bold score">2</span>
+                    <div class="fa fa-arrow-down downvote"></div>
+                  </div>
+                </div>
+                <div class="col-11">
+                  <h4 class="mb-1">
+                    <a href="/communities/1/posts/1">Webpackets vs Sprockets</a>
+                  </h4>
+                  <p>
+                    <small
+                      ><a href="/communities/1">Ruby on Rails Community</a>
+                      Posted by <a href="/u/davidb">David Battersby</a> about 2
+                      months ago.</small
+                    >
+                  </p>
+                  <p>
+                    Watch my video on adding Sprockets to a Rails 6 app. This
+                    can be helpful if you are upgrading an older app and want to
+                    work with the existing asset pipeline.
+                    https://www.youtube.com/watch?v=S-1x...
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="card p-3 mb-3">
+              <div class="row">
+                <div class="col-1 text-center">
+                  <div id="vote-actions-2" class="vote" data-id="2">
+                    <div class="fa fa-arrow-up upvote"></div>
+                    <span class="font-weight-bold score">0</span>
+                    <div class="fa fa-arrow-down downvote"></div>
+                  </div>
+                </div>
+                <div class="col-11">
+                  <h4 class="mb-1">
+                    <a href="/communities/3/posts/2">Hi, I&#39;m John</a>
+                  </h4>
+                  <p>
+                    <small
+                      ><a href="/communities/3">Introduce Yourself</a> Posted by
+                      <a href="/u/johnsmith">John Smith</a> about 2 months
+                      ago.</small
+                    >
+                  </p>
+                  <p>
+                    Nice to meet you all. Thanks for letting me join this
+                    community!
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-4">
+            <p class="h5 mb-4">Up and coming Communities</p>
+
+            <div class="card">
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item">
+                  <a href="/communities/1">Ruby on Rails Community</a>
+                </li>
+                <li class="list-group-item">
+                  <a href="/communities/2">Memes</a>
+                </li>
+                <li class="list-group-item">
+                  <a href="/communities/3">Introduce Yourself</a>
+                </li>
+                <li class="list-group-item">
+                  <a href="/communities/4">fake community</a>
+                </li>
+              </ul>
+            </div>
+
+            <a class="btn btn-primary mt-3" href="/communities">View all</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
