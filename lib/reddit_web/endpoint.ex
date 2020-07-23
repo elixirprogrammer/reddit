@@ -51,6 +51,6 @@ defmodule RedditWeb.Endpoint do
   plug Plug.Head
   plug Plug.Session, @session_options
   plug Pow.Plug.Session, otp_app: :reddit
-  plug RedditWeb.Router
   plug PowPersistentSession.Plug.Cookie
+  plug RedditWeb.Router
 end
