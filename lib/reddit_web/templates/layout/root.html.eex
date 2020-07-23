@@ -16,23 +16,31 @@
         <div class="row">
           <div class="col-12 pt-3 pb-3">
             <div class="float-right">
-              <div class="dropdown show float-right">
-                <a class="btn btn-white dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  some fake
-                </a>
+              <%= if Pow.Plug.current_user(@conn) do %>
+                <div class="dropdown show float-right">
+                  <a class="btn btn-white dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <%= @current_user.full_name %>
+                  </a>
 
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                  <a class="dropdown-item" href="/u/somefake">Profile</a>
-                  <a class="dropdown-item" href="/accounts/edit">Settings</a>
-                  <a class="dropdown-item" rel="nofollow" data-method="delete" href="/accounts/sign_out">Sign Out</a>
+                  <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                    <a class="dropdown-item" href="/u/somefake">Profile</a>
+                    <%= link "Settings", to: Routes.pow_registration_path(@conn, :edit), class: "dropdown-item" %>
+                    <%= link "Sign out", to: Routes.pow_session_path(@conn, :delete), method: :delete, class: "dropdown-item" %>
+                  </div>
                 </div>
+
+                <div class="karma float-left mt-2 mr-2">
+                  0
+                  <span class="fa fa-star text-warning"></span>
+                </div>
+              <% else %>
+                <%= link "Sign in", to: Routes.pow_session_path(@conn, :new), class: "btn btn-outline-primary" %>
+
+                <%= link "Register", to: Routes.pow_registration_path(@conn, :new), class: "btn btn-primary" %>
+              <% end %>
               </div>
-              <div class="karma float-left mt-2 mr-2">
-                0
-                <span class="fa fa-star text-warning"></span>
-              </div>
-            </div>
-            <p class="h3"><a href="/">Reddit</a></p>
+
+              <p class="h3"><a href="/">Reddit</a></p>
           </div>
         </div>
       </div>
