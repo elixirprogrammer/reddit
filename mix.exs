@@ -20,7 +20,7 @@ defmodule Reddit.MixProject do
   def application do
     [
       mod: {Reddit.Application, []},
-      extra_applications: [:logger, :runtime_tools]
+      extra_applications: [:logger, :runtime_tools, :timex]
     ]
   end
 
@@ -47,7 +47,8 @@ defmodule Reddit.MixProject do
       {:gettext, "~> 0.11"},
       {:jason, "~> 1.0"},
       {:plug_cowboy, "~> 2.0"},
-      {:pow, "~> 1.0.20"}
+      {:pow, "~> 1.0.20"},
+      {:timex, "~> 3.0"}
     ]
   end
 

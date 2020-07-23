@@ -23,7 +23,7 @@
                   </a>
 
                   <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                    <a class="dropdown-item" href="/u/somefake">Profile</a>
+                    <%= link "Profile", to: Routes.user_path(@conn, :profile, @current_user.username), class: "dropdown-item" %>
                     <%= link "Settings", to: Routes.pow_registration_path(@conn, :edit), class: "dropdown-item" %>
                     <%= link "Sign out", to: Routes.pow_session_path(@conn, :delete), method: :delete, class: "dropdown-item" %>
                   </div>
