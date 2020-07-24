@@ -1,0 +1,5 @@
+<h1>Edit Community</h1>
+
+<%= render "form.html", Map.put(assigns, :action, Routes.community_path(@conn, :update, @community)) %>
+
+<span><%= link "Back", to: Routes.community_path(@conn, :index) %></span>

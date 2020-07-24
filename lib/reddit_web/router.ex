@@ -49,7 +49,7 @@ defmodule RedditWeb.Router do
   scope "/", RedditWeb do
     pipe_through [:browser, :protected]
     # Add your protected routes here
-
+    resources "/r", CommunityController
   end
 
   # Other scopes may use custom stacks.

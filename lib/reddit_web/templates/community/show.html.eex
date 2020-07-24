@@ -1,0 +1,23 @@
+<h1>Show Community</h1>
+
+<ul>
+
+  <li>
+    <strong>Name:</strong>
+    <%= @community.name %>
+  </li>
+
+  <li>
+    <strong>Summary:</strong>
+    <%= @community.summary %>
+  </li>
+
+  <li>
+    <strong>Rules:</strong>
+    <%= @community.rules %>
+  </li>
+
+</ul>
+
+<span><%= link "Edit", to: Routes.community_path(@conn, :edit, @community) %></span>
+<span><%= link "Back", to: Routes.community_path(@conn, :index) %></span>

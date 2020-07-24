@@ -1,0 +1,30 @@
+<h1>Listing Communities</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Summary</th>
+      <th>Rules</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for community <- @communities do %>
+    <tr>
+      <td><%= community.name %></td>
+      <td><%= community.summary %></td>
+      <td><%= community.rules %></td>
+
+      <td>
+        <span><%= link "Show", to: Routes.community_path(@conn, :show, community) %></span>
+        <span><%= link "Edit", to: Routes.community_path(@conn, :edit, community) %></span>
+        <span><%= link "Delete", to: Routes.community_path(@conn, :delete, community), method: :delete, data: [confirm: "Are you sure?"] %></span>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+
+<span><%= link "New Community", to: Routes.community_path(@conn, :new) %></span>
