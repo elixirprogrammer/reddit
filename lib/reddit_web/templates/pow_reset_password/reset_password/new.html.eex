@@ -7,12 +7,13 @@
     </div>
   <% end %>
 
-  <%= label f, :email %>
-  <%= text_input f, :email %>
-  <%= error_tag f, :email %>
+  <div class="form-group">
+    <%= label f, :email %>
+    <%= text_input f, :email, class: "form-control" %>
+    <%= error_tag f, :email %>
+  </div>
 
-  <div>
-    <%= submit "Submit" %>
+  <div class="form-group">
+    <%= submit "Submit", class: "btn btn-primary" %>
   </div>
 <% end %>
-

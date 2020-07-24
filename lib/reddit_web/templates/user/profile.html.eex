@@ -1,20 +1,12 @@
-<section class="bg-light">
-  <div class="container">
-    <div class="row">
-      <div class="col-sm-12 pt-4">
-        <div class="row">
-          <div class="col-sm-8"></div>
-          <div class="col-sm-4">
-            <p class="h4"><%= @user.full_name %></p>
-            <p><%= @user.username %></p>
-            <p>
-              <%= @user.bio %>
-            </p>
+<div class="row">
+  <div class="col-sm-8"></div>
+  <div class="col-sm-4">
+    <p class="h4"><%= @user.full_name %></p>
+    <p><%= @user.username %></p>
+    <p>
+      <%= @user.bio %>
+    </p>
 
-            <p>Karma: 0 <span class="fa fa-star text-warning"></span></p>
-            <p>Cake day: <%= inserted_at(@user.inserted_at) %>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+    <p>Karma: 0 <span class="fa fa-star text-warning"></span></p>
+    <p>Cake day: <%= inserted_at(@user.inserted_at) %>
+</div>

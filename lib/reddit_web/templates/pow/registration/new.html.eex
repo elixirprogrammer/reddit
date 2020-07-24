@@ -1,55 +1,47 @@
-<section class="bg-light">
-  <div class="container">
-    <div class="row">
-      <div class="col-sm-12 pt-4">
-        <h2>Register</h2>
-        <div class="row">
-          <div class="col-sm-6">
-            <%= form_for @changeset, @action, [as: :user], fn f -> %>
-            <%= if @changeset.action do %>
-              <div class="alert alert-danger">
-                <p>Oops, something went wrong! Please check the errors below.</p>
-              </div>
-            <% end %>
-            <div class="form-group">
-              <%= label f, Pow.Ecto.Schema.user_id_field(@changeset) %>
-              <%= text_input f, Pow.Ecto.Schema.user_id_field(@changeset), class: "form-control", autocomplete: "off" %>
-              <%= error_tag f, Pow.Ecto.Schema.user_id_field(@changeset) %>
-            </div>
-
-            <div class="form-group">
-              <%= label f, :username %>
-              <%= text_input f, :username, class: "form-control", autocomplete: "off" %>
-              <%= error_tag f, :username %>
-            </div>
-
-            <div class="form-group">
-              <%= label f, :full_name %>
-              <%= text_input f, :full_name, class: "form-control", autocomplete: "off" %>
-              <%= error_tag f, :full_name %>
-            </div>
-
-            <div class="form-group">
-              <%= label f, :password %>
-              <%= password_input f, :password, class: "form-control", autocomplete: "off" %>
-              <%= error_tag f, :password %>
-            </div>
-
-            <div class="form-group">
-              <%= label f, :password_confirmation %>
-              <%= password_input f, :password_confirmation, class: "form-control", autocomplete: "off" %>
-              <%= error_tag f, :password_confirmation %>
-            </div>
-
-            <div class="form-group">
-              <%= submit "Register", class: "btn btn-primary" %>
-            </div>
-            <% end %>
-
-            <%= link "Sign in", to: Routes.pow_session_path(@conn, :new) %>
-          </div>
-        </div>
+<h2>Register</h2>
+<div class="row">
+  <div class="col-sm-6">
+    <%= form_for @changeset, @action, [as: :user], fn f -> %>
+    <%= if @changeset.action do %>
+      <div class="alert alert-danger">
+        <p>Oops, something went wrong! Please check the errors below.</p>
       </div>
+    <% end %>
+    <div class="form-group">
+      <%= label f, Pow.Ecto.Schema.user_id_field(@changeset) %>
+      <%= text_input f, Pow.Ecto.Schema.user_id_field(@changeset), class: "form-control", autocomplete: "off" %>
+      <%= error_tag f, Pow.Ecto.Schema.user_id_field(@changeset) %>
     </div>
+
+    <div class="form-group">
+      <%= label f, :username %>
+      <%= text_input f, :username, class: "form-control", autocomplete: "off" %>
+      <%= error_tag f, :username %>
+    </div>
+
+    <div class="form-group">
+      <%= label f, :full_name %>
+      <%= text_input f, :full_name, class: "form-control", autocomplete: "off" %>
+      <%= error_tag f, :full_name %>
+    </div>
+
+    <div class="form-group">
+      <%= label f, :password %>
+      <%= password_input f, :password, class: "form-control", autocomplete: "off" %>
+      <%= error_tag f, :password %>
+    </div>
+
+    <div class="form-group">
+      <%= label f, :password_confirmation %>
+      <%= password_input f, :password_confirmation, class: "form-control", autocomplete: "off" %>
+      <%= error_tag f, :password_confirmation %>
+    </div>
+
+    <div class="form-group">
+      <%= submit "Register", class: "btn btn-primary" %>
+    </div>
+    <% end %>
+
+    <%= link "Sign in", to: Routes.pow_session_path(@conn, :new) %>
   </div>
 </div>

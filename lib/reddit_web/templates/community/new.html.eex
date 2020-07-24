@@ -1,7 +1,3 @@
-<section class="bg-light">
-  <div class="container">
-    <div class="row">
-      <div class="col-sm-12 pt-4">
         <h2>New Community</h2>
 
         <div class="row">
@@ -65,10 +61,6 @@
             </form>
           </div>
         </div>
-      </div>
-    </div>
-  </div>
-</section>
 
 <h1>New Community</h1>
 
