@@ -18,7 +18,7 @@
       <td><%= community.rules %></td>
 
       <td>
-        <span><%= link "Show", to: Routes.community_path(@conn, :show, community) %></span>
+        <span><%= link "Show", to: Routes.community_path(@conn, :show, community.name) %></span>
         <span><%= link "Edit", to: Routes.community_path(@conn, :edit, community) %></span>
         <span><%= link "Delete", to: Routes.community_path(@conn, :delete, community), method: :delete, data: [confirm: "Are you sure?"] %></span>
       </td>

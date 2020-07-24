@@ -26,9 +26,14 @@ defmodule RedditWeb.CommunityController do
     end
   end
 
-  def show(conn, %{"id" => id}) do
-    community = Category.get_community!(id)
-    render(conn, "show.html", community: community)
+  def show(conn, %{"name" => name}) do
+    community = Category.get_name(name)
+
+    if community do
+      render(conn, "show.html", community: community)
+    else
+      redirect(conn, to: "/")
+    end
   end
 
   def edit(conn, %{"id" => id}) do
