@@ -15,6 +15,20 @@ defmodule Reddit.Category.Community do
     community
     |> cast(attrs, [:name, :summary, :rules])
     |> validate_required([:name, :summary, :rules])
+    |> trim_name()
     |> unique_constraint(:name)
+  end
+
+  defp trim_name(changeset) do
+    case changeset do
+      %Ecto.Changeset{valid?: true, changes: %{name: name}} ->
+        put_change(changeset, :name, clean_name(name))
+      _ ->
+        changeset
+    end
+  end
+
+  defp clean_name(name) do
+    name |> String.split |> Enum.join
   end
 end

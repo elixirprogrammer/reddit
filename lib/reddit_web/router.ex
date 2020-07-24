@@ -32,6 +32,8 @@ defmodule RedditWeb.Router do
 
     get "/", PageController, :index
     get "/u/:username", UserController, :profile
+    resources "/comunities", CommunityController, except: [:show]
+    get "/communities/r/:name", CommunityController, :show
   end
 
   scope "/" do
@@ -49,8 +51,6 @@ defmodule RedditWeb.Router do
   scope "/", RedditWeb do
     pipe_through [:browser, :protected]
     # Add your protected routes here
-    resources "/comunities", CommunityController, except: [:show]
-    get "/communities/r/:name", CommunityController, :show
   end
 
   # Other scopes may use custom stacks.
