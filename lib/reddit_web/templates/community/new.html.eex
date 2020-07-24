@@ -1,70 +1,10 @@
-        <h2>New Community</h2>
+<h2>New Community</h2>
 
-        <div class="row">
-          <div class="col-sm-6">
-            <form
-              class="new_community"
-              id="new_community"
-              action="/communities"
-              accept-charset="UTF-8"
-              method="post"
-            >
-              <input
-                type="hidden"
-                name="authenticity_token"
-                value="m0UUDb+8ku2eLx3vAuWYniYvEZ+XXUDSEQ6yXAbKcPVYB+BM5mkL7FSqqrUymJQFSSAnlYoOwlfcPrTisyVxTg=="
-              />
-              <div class="form-group">
-                <label for="name">Name</label>
-                <input
-                  class="form-control"
-                  type="text"
-                  name="community[name]"
-                  id="community_name"
-                />
-              </div>
-
-              <div class="form-group">
-                <label for="url">Url</label>
-                <input
-                  class="form-control"
-                  type="text"
-                  name="community[url]"
-                  id="community_url"
-                />
-              </div>
-              <div class="form-group">
-                <label for="summary">Summary</label>
-                <input
-                  class="form-control"
-                  type="text"
-                  name="community[summary]"
-                  id="community_summary"
-                />
-              </div>
-              <div class="form-group">
-                <label for="rules">Rules</label>
-                <textarea
-                  class="form-control"
-                  name="community[rules]"
-                  id="community_rules"
-                ></textarea>
-              </div>
-
-              <input
-                type="submit"
-                name="commit"
-                value="Submit"
-                class="btn btn-primary"
-                data-disable-with="Submit"
-              />
-            </form>
-          </div>
-        </div>
-
-<h1>New Community</h1>
-
-<%= render "form.html", Map.put(assigns, :action, Routes.community_path(@conn,
+<div class="row">
+    <div class="col-sm-6">
+        <%= render "form.html", Map.put(assigns, :action, Routes.community_path(@conn,
 :create)) %>
+    </div>
+</div>
 
 <span><%= link "Back", to: Routes.community_path(@conn, :index) %></span>

@@ -5,19 +5,25 @@
     </div>
   <% end %>
 
-  <%= label f, :name %>
-  <%= textarea f, :name %>
-  <%= error_tag f, :name %>
+  <div class="form-group">
+    <%= label f, :name %>
+    <%= text_input f, :name, class: "form-control", autocomplete: "off" %>
+    <%= error_tag f, :name %>
+  </div>
 
-  <%= label f, :summary %>
-  <%= textarea f, :summary %>
-  <%= error_tag f, :summary %>
+  <div class="form-group">
+    <%= label f, :summary %>
+    <%= textarea f, :summary, class: "form-control", autocomplete: "off" %>
+    <%= error_tag f, :summary %>
+  </div>
 
-  <%= label f, :rules %>
-  <%= textarea f, :rules %>
-  <%= error_tag f, :rules %>
+  <div class="form-group">
+    <%= label f, :rules %>
+    <%= textarea f, :rules, class: "form-control", autocomplete: "off" %>
+    <%= error_tag f, :rules %>
+  </div>
 
-  <div>
-    <%= submit "Save" %>
+  <div class="form-group">
+    <%= submit "Save", class: "btn btn-primary" %>
   </div>
 <% end %>

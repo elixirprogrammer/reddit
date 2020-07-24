@@ -15,5 +15,6 @@ defmodule Reddit.Category.Community do
     community
     |> cast(attrs, [:name, :summary, :rules])
     |> validate_required([:name, :summary, :rules])
+    |> unique_constraint(:name)
   end
 end
