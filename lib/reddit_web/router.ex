@@ -31,7 +31,7 @@ defmodule RedditWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :index
-    get "/:username", UserController, :profile
+    get "/u/:username", UserController, :profile
   end
 
   scope "/" do
