@@ -32,7 +32,7 @@ defmodule RedditWeb.Router do
 
     get "/", PageController, :index
     get "/u/:username", UserController, :profile
-    resources "/comunities", CommunityController, except: [:show]
+    resources "/communities", CommunityController, except: [:show]
     get "/r/:name", CommunityController, :show
   end
 

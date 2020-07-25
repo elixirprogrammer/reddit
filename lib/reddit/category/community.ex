@@ -2,10 +2,13 @@ defmodule Reddit.Category.Community do
   use Ecto.Schema
   import Ecto.Changeset
 
+  alias Reddit.Users.User
+
   schema "communities" do
     field :name, :string
     field :rules, :string
     field :summary, :string
+    belongs_to :user, User
 
     timestamps()
   end

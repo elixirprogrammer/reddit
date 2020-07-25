@@ -8,6 +8,7 @@ defmodule Reddit.Users.User do
 
   alias Reddit.Users.User
   alias Reddit.Repo
+  alias Reddit.Category.Community
 
   schema "users" do
     pow_user_fields()
@@ -16,6 +17,7 @@ defmodule Reddit.Users.User do
     field :full_name, :string
     field :bio, :string
     field :karma, :integer, default: 0
+    has_many :communities, Community
 
     timestamps()
   end

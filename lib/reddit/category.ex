@@ -49,9 +49,14 @@ defmodule Reddit.Category do
       {:error, %Ecto.Changeset{}}
 
   """
-  def create_community(attrs \\ %{}) do
-    %Community{}
-    |> Community.changeset(attrs)
+  #def create_community(attrs \\ %{}) do
+  #  %Community{}
+  #  |> Community.changeset(attrs)
+  #  |> Repo.insert()
+ # end
+
+  def create_community(user, community) do
+    Ecto.build_assoc(user, :communities, community)
     |> Repo.insert()
   end
 

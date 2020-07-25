@@ -15,11 +15,14 @@ defmodule RedditWeb.CommunityController do
   end
 
   def create(conn, %{"community" => community_params}) do
-    case Category.create_community(community_params) do
+    #community = Map.put(community_params, "user_id", Integer.to_string(conn.assigns.current_user.id))
+    community = community_params |> Map.new(fn {k, v} -> {String.to_atom(k), v} end)
+
+    case Category.create_community(conn.assigns.current_user, community) do
       {:ok, community} ->
         conn
         |> put_flash(:info, "Community created successfully.")
-        |> redirect(to: Routes.community_path(conn, :show, community))
+        |> redirect(to: Routes.community_path(conn, :show, community.name))
 
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, "new.html", changeset: changeset)
