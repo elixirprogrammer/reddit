@@ -3,6 +3,7 @@ defmodule RedditWeb.CommunityController do
 
   alias Reddit.Category
   alias Reddit.Category.Community
+  alias Reddit.Users.User
 
   def index(conn, _params) do
     communities = Category.list_communities()
@@ -20,6 +21,8 @@ defmodule RedditWeb.CommunityController do
 
     case Category.create_community(conn.assigns.current_user, community) do
       {:ok, community} ->
+        User.karma_update(conn.assigns.current_user.id, 1)
+
         conn
         |> put_flash(:info, "Community created successfully.")
         |> redirect(to: Routes.community_path(conn, :show, community.name))

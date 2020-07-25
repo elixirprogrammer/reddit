@@ -34,4 +34,5 @@ defmodule Reddit.Category.Community do
   defp clean_name(name) do
     name |> String.split |> Enum.join
   end
+
 end

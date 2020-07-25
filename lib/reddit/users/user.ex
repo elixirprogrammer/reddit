@@ -5,6 +5,7 @@ defmodule Reddit.Users.User do
     extensions: [PowResetPassword]
 
   import Ecto.Changeset
+  import Ecto.Query, only: [from: 2]
 
   alias Reddit.Users.User
   alias Reddit.Repo
@@ -40,5 +41,10 @@ defmodule Reddit.Users.User do
 
   def profile(param) do
     Repo.get_by(User, username: param)
+  end
+
+  def karma_update(user_id, k) do
+    from(u in User, update: [inc: [karma: ^k]], where: u.id == ^user_id)
+    |> Repo.update_all([])
   end
 end
