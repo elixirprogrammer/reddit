@@ -107,8 +107,4 @@ defmodule Reddit.Category do
     Community.changeset(community, attrs)
   end
 
-
-  def get_name(param) do
-    Repo.get_by(Community, name: param)
-  end
 end

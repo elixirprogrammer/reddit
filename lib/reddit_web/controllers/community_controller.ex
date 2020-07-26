@@ -4,6 +4,7 @@ defmodule RedditWeb.CommunityController do
   alias Reddit.Category
   alias Reddit.Category.Community
   alias Reddit.Users.User
+  alias Reddit.Repo
 
   def index(conn, _params) do
     communities = Category.list_communities()
@@ -33,7 +34,7 @@ defmodule RedditWeb.CommunityController do
   end
 
   def show(conn, %{"name" => name}) do
-    community = Category.get_name(name)
+    community = Repo.get_by(Community, name: name)
 
     if community do
       render(conn, "show.html", community: community)
