@@ -67,7 +67,7 @@
     </div>
 
     <small>
-      <p><%= @community.rules %></p>
+      <p><%= text_to_html(@community.rules) %></p>
     </small>
   </div>
 </div>
