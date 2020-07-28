@@ -66,9 +66,11 @@
       <p>1 member</p>
     </div>
 
-    <small>
-      <p><%= text_to_html(@community.rules) %></p>
-    </small>
+    <div class="p-3">
+      <small>
+        <p><%= text_to_html(@community.rules) %></p>
+      </small>
+    </div>
   </div>
 </div>
 
