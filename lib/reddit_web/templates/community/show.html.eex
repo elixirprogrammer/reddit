@@ -3,32 +3,9 @@
     <h3>r/<%= @community.name %></h3>
   </div>
   <div class="col-sm-4">
-    <form
-      class="new_subscription"
-      id="new_subscription"
-      action="/subscriptions"
-      accept-charset="UTF-8"
-      method="post"
-    >
-      <input
-        type="hidden"
-        name="authenticity_token"
-        value="prD1CI3MYg3amfGOaQOpOcMC0BCFvIq10CF+IP2YdYy2mt7x3ZZuMmvZr/bW23/nc4V8Oq+cSTFK13rqDUEboA=="
-      />
-      <input
-        value="3"
-        type="hidden"
-        name="subscription[community_id]"
-        id="subscription_community_id"
-      />
-      <input
-        type="submit"
-        name="commit"
-        value="Join Community"
-        class="btn btn-success text-uppercase float-right"
-        data-disable-with="Join Community"
-      />
-    </form>
+    <%= if Pow.Plug.current_user(@conn) do %>
+      <%= live_render(@conn, RedditWeb.SubscriptionsLive, session: %{"current_user" => @current_user.id}) %>
+    <% end %>
   </div>
 </div>
 <div class="row">
