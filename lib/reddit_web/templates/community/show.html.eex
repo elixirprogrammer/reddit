@@ -4,7 +4,7 @@
   </div>
   <div class="col-sm-4">
     <%= if Pow.Plug.current_user(@conn) do %>
-      <%= live_render(@conn, RedditWeb.SubscriptionsLive, session: %{"current_user" => @current_user.id}) %>
+      <%= live_render(@conn, RedditWeb.SubscriptionsLive, session: %{"current_user" => @current_user.id, "community" => @community.id}) %>
     <% end %>
   </div>
 </div>
