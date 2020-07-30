@@ -34,7 +34,7 @@ defmodule RedditWeb.CommunityController do
   end
 
   def show(conn, %{"name" => name}) do
-    community = Repo.get_by(Community, name: name)
+    community = Repo.get_by(Community, name: name) |> Repo.preload(:subscriptions)
 
     if community do
       render(conn, "show.html", community: community)
