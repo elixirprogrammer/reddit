@@ -7,27 +7,17 @@ defmodule RedditWeb.SubscriptionsLive do
   import Ecto.Query, only: [where: 2]
 
   def mount(_params, %{"current_user" => u_id, "community" => c_id}, socket) do
-    if Subscription |> where(user_id: ^u_id) |> where(community_id: ^c_id) |> Repo.all() !== [] do
-      socket =
+    subscribed? = subscribed?(u_id, c_id)
+
+    socket =
       assign(socket,
       user: u_id,
       community: c_id,
-      status: "Leave Community",
-      btn_status: "secondary",
-      disable_with: "Leaving...")
+      status: get_status(subscribed?),
+      btn_status: get_btn_status(subscribed?),
+      disable_with: get_disable_with(subscribed?))
 
-      {:ok , socket}
-    else
-      socket =
-      assign(socket,
-      user: u_id,
-      community: c_id,
-      status: "Join Community",
-      btn_status: "success",
-      disable_with: "Joining...")
-
-      {:ok , socket}
-    end
+    {:ok , socket}
   end
 
   def render(assigns) do
@@ -43,34 +33,41 @@ defmodule RedditWeb.SubscriptionsLive do
   end
 
   def handle_event("toggle-status", %{"user" => u_id, "community" => c_id}, socket) do
-    if Subscription |> where(user_id: ^u_id) |> where(community_id: ^c_id) |> Repo.all() !== [] do
-      Subscription.delete_old_relationship(u_id, c_id)
+    subscribed? = build_subscription(subscribed?(u_id, c_id), u_id, c_id)
 
-      socket =
+    socket =
       assign(socket,
-      user: u_id,
-      community: c_id,
-      status: "Join Community",
-      btn_status: "success",
-      disable_with: "Joining...")
+      status: get_status(subscribed?),
+      btn_status: get_btn_status(subscribed?),
+      disable_with: get_disable_with(subscribed?))
 
-      :timer.sleep(500)
+    :timer.sleep(500)
 
-      {:noreply , socket}
-    else
-      Subscription.build_relationship(u_id, c_id)
-
-      socket =
-      assign(socket,
-      user: u_id,
-      community: c_id,
-      status: "Leave Community",
-      btn_status: "secondary",
-      disable_with: "Leaving...")
-
-      :timer.sleep(500)
-
-      {:noreply , socket}
-    end
+    {:noreply , socket}
   end
+
+  defp subscribed?(user, community) do
+    Subscription
+    |> where(user_id: ^user)
+    |> where(community_id: ^community)
+    |> Repo.all()
+  end
+
+  defp build_subscription(subscribed?, user, community) when subscribed? == [] do
+    Subscription.build_relationship(user, community)
+
+    subscribed?(user, community)
+  end
+  defp build_subscription(_subscribed?, user, community) do
+    Subscription.delete_old_relationship(user, community)
+
+    subscribed?(user, community)
+  end
+
+  defp get_status(subscribed?) when subscribed? == [], do: "Join Community"
+  defp get_status(_subscribed?), do: "Leave Community"
+  defp get_btn_status(subscribed?) when subscribed? == [], do: "success"
+  defp get_btn_status(_subscribed?), do: "secondary"
+  defp get_disable_with(subscribed?) when subscribed? == [], do: "Joining..."
+  defp get_disable_with(_subscribed?), do: "Leaving..."
 end
