@@ -48,7 +48,8 @@ defmodule Reddit.MixProject do
       {:jason, "~> 1.0"},
       {:plug_cowboy, "~> 2.0"},
       {:pow, "~> 1.0.20"},
-      {:timex, "~> 3.0"}
+      {:timex, "~> 3.0"},
+      { :inflex, "~> 2.0.0" }
     ]
   end
 
