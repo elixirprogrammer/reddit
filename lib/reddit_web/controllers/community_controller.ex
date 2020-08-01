@@ -34,10 +34,11 @@ defmodule RedditWeb.CommunityController do
   end
 
   def show(conn, %{"name" => name}) do
-    community = Repo.get_by(Community, name: name) |> Repo.preload(:subscriptions)
+    community = Repo.get_by(Community, name: name)
+    members = Category.members(community)
 
     if community do
-      render(conn, "show.html", community: community)
+      render(conn, "show.html", community: community, members: members)
     else
       redirect(conn, to: "/")
     end

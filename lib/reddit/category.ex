@@ -2,10 +2,9 @@ defmodule Reddit.Category do
   @moduledoc """
   The Category context.
   """
+  import Ecto
 
-  import Ecto.Query, warn: false
   alias Reddit.Repo
-
   alias Reddit.Category.Community
 
   @doc """
@@ -105,6 +104,12 @@ defmodule Reddit.Category do
   """
   def change_community(%Community{} = community, attrs \\ %{}) do
     Community.changeset(community, attrs)
+  end
+
+  def members(community) do
+    community
+    |> assoc(:subscriptions)
+    |> Repo.aggregate(:count, :user_id)
   end
 
 end
