@@ -4,12 +4,12 @@ defmodule RedditWeb.UserController do
   alias Reddit.Users.User
 
   def profile(conn, %{"username" => username}) do
-    user = User.profile(username)
-
-    if user do
-      render(conn, :profile, user: user)
-    else
-      redirect(conn, to: "/")
+    case User.profile(username) do
+      nil ->
+        redirect(conn, to: "/")
+      user ->
+        render(conn, :profile, user: user)
     end
   end
+
 end
