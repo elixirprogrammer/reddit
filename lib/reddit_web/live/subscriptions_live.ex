@@ -53,15 +53,17 @@ defmodule RedditWeb.SubscriptionsLive do
     |> Repo.all()
   end
 
-  defp build_subscription(subscribed?, user, community) when subscribed? == [] do
-    Subscription.build_relationship(user, community)
+  defp build_subscription(subscribed?, user, community) do
+    case subscribed? do
+      [] ->
+        Subscription.build_relationship(user, community)
 
-    subscribed?(user, community)
-  end
-  defp build_subscription(_subscribed?, user, community) do
-    Subscription.delete_old_relationship(user, community)
+        subscribed?(user, community)
+      _ ->
+        Subscription.delete_old_relationship(user, community)
 
-    subscribed?(user, community)
+        subscribed?(user, community)
+    end
   end
 
   defp get_status(subscribed?) when subscribed? == [], do: "Join Community"
