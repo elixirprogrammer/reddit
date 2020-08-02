@@ -11,6 +11,7 @@ defmodule Reddit.Users.User do
   alias Reddit.Repo
   alias Reddit.Category.Community
   alias Reddit.Community.Subscription
+  alias Reddit.Community.Post
 
   schema "users" do
     pow_user_fields()
@@ -21,6 +22,7 @@ defmodule Reddit.Users.User do
     field :karma, :integer, default: 0
     has_many :communities, Community
     has_many :subscriptions, Subscription
+    has_many :posts, Post
 
     timestamps()
   end

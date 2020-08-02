@@ -4,6 +4,7 @@ defmodule Reddit.Category.Community do
 
   alias Reddit.Users.User
   alias Reddit.Community.Subscription
+  alias Reddit.Community.Post
 
   schema "communities" do
     field :name, :string
@@ -12,6 +13,7 @@ defmodule Reddit.Category.Community do
     field :members, :integer, default: 0
     belongs_to :user, User
     has_many :subscriptions, Subscription
+    has_many :posts, Post
 
     timestamps()
   end
