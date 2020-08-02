@@ -11,6 +11,7 @@ defmodule RedditWeb.SubscriptionsLive do
 
     socket =
       assign(socket,
+      subscribed?: subscribed?,
       user: u_id,
       community: c_id,
       status: get_status(subscribed?),
@@ -22,6 +23,10 @@ defmodule RedditWeb.SubscriptionsLive do
 
   def render(assigns) do
     ~L"""
+    <%= if @subscribed? !== [] do %>
+      <%= link "Create New Post", to: "/", class: "btn btn-primary float-left"%>
+    <% end %>
+
       <button class="btn btn-<%= @btn_status %> text-uppercase float-right"
               phx-value-user="<%= @user %>"
               phx-value-community="<%= @community %>"
@@ -37,6 +42,7 @@ defmodule RedditWeb.SubscriptionsLive do
 
     socket =
       assign(socket,
+      subscribed?: subscribed?,
       status: get_status(subscribed?),
       btn_status: get_btn_status(subscribed?),
       disable_with: get_disable_with(subscribed?))

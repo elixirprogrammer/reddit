@@ -38,8 +38,7 @@ defmodule RedditWeb.CommunityController do
       nil ->
         redirect(conn, to: "/")
       community ->
-        members = Category.members(community)
-        render(conn, "show.html", community: community, members: members)
+        render(conn, "show.html", community: community)
     end
   end
 

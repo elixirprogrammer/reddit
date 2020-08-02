@@ -4,6 +4,7 @@ defmodule Reddit.Community.Subscription do
   import Ecto.Query, only: [where: 2]
 
   alias Reddit.Users.User
+  alias Reddit.Category
   alias Reddit.Category.Community
   alias Reddit.Community.Subscription
   alias Reddit.Repo
@@ -26,6 +27,8 @@ defmodule Reddit.Community.Subscription do
   def build_relationship(user, community) do
     Subscription.changeset(%Subscription{}, %{user_id: user, community_id: community})
     |> Repo.insert()
+
+    Category.members_update(community, 1)
   end
 
   def delete_old_relationship(user, community) do
@@ -33,5 +36,7 @@ defmodule Reddit.Community.Subscription do
     |> where(user_id: ^user)
     |> where(community_id: ^community)
     |> Repo.delete_all()
+
+    Category.members_update(community, -1)
   end
 end

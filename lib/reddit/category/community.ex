@@ -9,6 +9,7 @@ defmodule Reddit.Category.Community do
     field :name, :string
     field :rules, :string
     field :summary, :string
+    field :members, :integer, default: 0
     belongs_to :user, User
     has_many :subscriptions, Subscription
 
@@ -18,7 +19,7 @@ defmodule Reddit.Category.Community do
   @doc false
   def changeset(community, attrs) do
     community
-    |> cast(attrs, [:name, :summary, :rules])
+    |> cast(attrs, [:name, :summary, :rules, :members])
     |> validate_required([:name, :summary, :rules])
     |> trim_name()
     |> unique_constraint(:name)

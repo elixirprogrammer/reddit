@@ -3,6 +3,7 @@ defmodule Reddit.Category do
   The Category context.
   """
   import Ecto
+  import Ecto.Query, only: [from: 2]
 
   alias Reddit.Repo
   alias Reddit.Category.Community
@@ -110,6 +111,11 @@ defmodule Reddit.Category do
     community
     |> assoc(:subscriptions)
     |> Repo.aggregate(:count, :user_id)
+  end
+
+  def members_update(community_id, count) do
+    from(c in Community, update: [inc: [members: ^count]], where: c.id == ^community_id)
+    |> Repo.update_all([])
   end
 
 end
