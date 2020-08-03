@@ -8,8 +8,8 @@ defmodule Reddit.Community.Post do
   schema "posts" do
     field :body, :string
     field :title, :string
-    field :upvote, :integer, default: 0
-    field :downvote, :integer, default: 0
+    field :upvotes, :integer, default: 0
+    field :downvotes, :integer, default: 0
     field :comments, :integer, default: 0
     belongs_to :community, Community
     belongs_to :user, User
@@ -20,7 +20,7 @@ defmodule Reddit.Community.Post do
   @doc false
   def changeset(post, attrs) do
     post
-    |> cast(attrs, [:title, :body, :upvote, :downvote, :comments])
+    |> cast(attrs, [:title, :body, :upvotes, :downvotes, :comments])
     |> validate_required([:title, :body])
   end
 end

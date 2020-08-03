@@ -34,6 +34,7 @@ defmodule RedditWeb.Router do
     get "/u/:username", UserController, :profile
     resources "/communities", CommunityController, only: [:index]
     get "/r/:name", CommunityController, :show
+    get "/r/:name/posts/:id", PostController, :show
   end
 
   scope "/" do

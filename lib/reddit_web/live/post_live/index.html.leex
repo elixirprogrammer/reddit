@@ -1,12 +1,10 @@
-<h1>Listing Posts</h1>
-
 <%= if @live_action in [:new, :edit] do %>
   <%= live_modal @socket, RedditWeb.PostLive.FormComponent,
     id: @post.id || :new,
     title: @page_title,
     action: @live_action,
     post: @post,
-    return_to: Routes.post_index_path(@socket, :index) %>
+    return_to: Routes.post_index_path(@socket,:index) %>
 <% end %>
 
 <table>
@@ -20,16 +18,25 @@
   </thead>
   <tbody id="posts">
     <%= for post <- @posts do %>
-      <tr id="post-<%= post.id %>">
-        <td><%= post.title %></td>
-        <td><%= post.body %></td>
+    <tr id="post-<%= post.id %>">
+      <td><%= post.title %></td>
+      <td><%= post.body %></td>
 
-        <td>
-          <span><%= live_redirect "Show", to: Routes.post_show_path(@socket, :show, post) %></span>
-          <span><%= live_patch "Edit", to: Routes.post_index_path(@socket, :edit, post) %></span>
-          <span><%= link "Delete", to: "#", phx_click: "delete", phx_value_id: post.id, data: [confirm: "Are you sure?"] %></span>
-        </td>
-      </tr>
+      <td>
+        <span
+          ><%= live_redirect "Show", to: Routes.post_show_path(@socket, :show,
+          post) %></span
+        >
+        <span
+          ><%= live_patch "Edit", to: Routes.post_index_path(@socket, :edit,
+          post) %></span
+        >
+        <span
+          ><%= link "Delete", to: "#", phx_click: "delete", phx_value_id:
+          post.id, data: [confirm: "Are you sure?"] %></span
+        >
+      </td>
+    </tr>
     <% end %>
   </tbody>
 </table>

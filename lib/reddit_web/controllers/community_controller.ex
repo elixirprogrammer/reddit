@@ -5,6 +5,7 @@ defmodule RedditWeb.CommunityController do
   alias Reddit.Category.Community
   alias Reddit.Users.User
   alias Reddit.Repo
+  alias Reddit.Community, as: Post
 
   def index(conn, _params) do
     communities = Category.list_communities()
@@ -34,11 +35,13 @@ defmodule RedditWeb.CommunityController do
   end
 
   def show(conn, %{"name" => name}) do
+    posts = Post.list_posts()
+
     case Repo.get_by(Community, name: name) do
       nil ->
         redirect(conn, to: "/")
       community ->
-        render(conn, "show.html", community: community)
+        render(conn, "show.html", community: community, posts: posts)
     end
   end
 

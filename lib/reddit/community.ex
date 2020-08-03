@@ -2,7 +2,7 @@ defmodule Reddit.Community do
   @moduledoc """
   The Community context.
   """
-
+  import Ecto
   import Ecto.Query, warn: false
   alias Reddit.Repo
 
@@ -18,7 +18,7 @@ defmodule Reddit.Community do
 
   """
   def list_posts do
-    Repo.all(Post)
+    Repo.all(Post) |> Repo.preload([:user, :community])
   end
 
   @doc """
@@ -49,9 +49,11 @@ defmodule Reddit.Community do
       {:error, %Ecto.Changeset{}}
 
   """
-  def create_post(attrs \\ %{}) do
-    %Post{}
-    |> Post.changeset(attrs)
+  def create_post(user, community, post) do
+    Ecto.build_assoc(user, :posts, post)
+    |> Repo.insert()
+
+    Ecto.build_assoc(community, :posts, post)
     |> Repo.insert()
   end
 

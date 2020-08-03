@@ -1,0 +1,27 @@
+<%= for post <- @posts do %>
+  <div class="card p-3 mb-3">
+    <div class="row">
+      <div class="col-1 text-center">
+        <div id="vote-actions-2" class="vote" data-id="2">
+          <div class="fa fa-arrow-up upvote"></div>
+          <span class="font-weight-bold score"><%= post.upvotes %></span>
+          <div class="fa fa-arrow-down downvote"></div>
+        </div>
+      </div>
+      <div class="col-11">
+        <h4 class="mb-1">
+          <%= link post.title, to: Routes.post_path(@conn, :show, post.community.name, post.id) %>
+        </h4>
+        <p>
+            <small>
+                <%= link post.community.name, to: Routes.community_path(@conn, :show, post.community.name) %> Posted by
+                <%= link post.user.full_name, to: Routes.user_path(@conn, :profile, post.user.username) %> <%= Timex.from_now(post.inserted_at) %>
+            </small>
+        </p>
+        <p>
+          <%= post.body %>
+        </p>
+      </div>
+    </div>
+  </div>
+<% end %>
