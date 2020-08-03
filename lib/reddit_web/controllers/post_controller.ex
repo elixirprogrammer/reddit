@@ -6,9 +6,11 @@ defmodule RedditWeb.PostController do
   alias Reddit.Category.Community
   alias Reddit.Category
   alias Reddit.Users.User
+  alias Reddit.Repo
 
-  def show(conn, _params) do
-    render conn, :show
+  def show(conn, %{"id" => id}) do
+    post = CommunityPost.get_post!(id) |> Repo.preload(:community)
+    render(conn, :show, post: post, community: post.community)
   end
 
   def new(conn, %{"community_id" => community_id}) do
