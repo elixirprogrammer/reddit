@@ -1,0 +1,10 @@
+<h2>New Post</h2>
+
+<div class="row">
+  <div class="col-sm-6">
+    <%= render "form.html", Map.put(assigns, :action, Routes.community_post_path(@conn,
+:create, @community.id)) %>
+  </div>
+</div>
+
+<span><%= link "Back", to: Routes.community_path(@conn, :show, @community.name) %></span>

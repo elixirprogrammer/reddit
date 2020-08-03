@@ -24,7 +24,7 @@ defmodule RedditWeb.SubscriptionsLive do
   def render(assigns) do
     ~L"""
     <%= if @subscribed? !== [] do %>
-      <%= link "Create New Post", to: "/", class: "btn btn-primary float-left"%>
+      <%= link "Create New Post", to: "/communities/#{@community}/posts/new", class: "btn btn-primary float-left"%>
     <% end %>
 
       <button class="btn btn-<%= @btn_status %> text-uppercase float-right"

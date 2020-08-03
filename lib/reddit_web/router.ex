@@ -51,7 +51,9 @@ defmodule RedditWeb.Router do
 
   scope "/", RedditWeb do
     pipe_through [:browser, :protected]
-    resources "/communities", CommunityController, except: [:index, :show]
+    resources "/communities", CommunityController, except: [:index, :show] do
+      resources "/posts", PostController, except: [:index, :show]
+    end
     # Add your protected routes here
   end
 

@@ -50,12 +50,11 @@ defmodule Reddit.Community do
 
   """
   def create_post(user, community, post) do
-    Ecto.build_assoc(user, :posts, post)
-    |> Repo.insert()
+    p = Ecto.build_assoc(user, :posts, post)
 
-    Ecto.build_assoc(community, :posts, post)
+    Ecto.build_assoc(community, :posts, p)
     |> Repo.insert()
-  end
+ end
 
   @doc """
   Updates a post.
@@ -103,4 +102,5 @@ defmodule Reddit.Community do
   def change_post(%Post{} = post, attrs \\ %{}) do
     Post.changeset(post, attrs)
   end
+
 end
