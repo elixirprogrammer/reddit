@@ -11,58 +11,7 @@
 
     <%= text_to_html(@post.body, [wrapper_tag: :p]) %>
 
-    <div id="post-comments">
-      <div class="comment">
-        <a href="/u/davidb">David Battersby</a>
-        <p>Let me know what you guys think.</p>
-      </div>
-      <div class="comment">
-        <a href="/u/moskina">moskina moskina</a>
-        <p>adasdsad</p>
-      </div>
-      <div class="comment">
-        <a href="/u/moskina">moskina moskina</a>
-        <p>adasdsadsdasd</p>
-      </div>
-      <div class="comment">
-        <a href="/u/moskina">moskina moskina</a>
-        <p>adasdsadsdasddasdasd</p>
-      </div>
-      <div class="comment">
-        <a href="/u/testing">test testtest</a>
-        <p>test test</p>
-      </div>
-    </div>
-
-    <h5>Leave a comment</h5>
-    <form
-      class="new_comment"
-      id="new_comment"
-      action="/comments"
-      accept-charset="UTF-8"
-      data-remote="true"
-      method="post"
-    >
-      <input
-        value="1"
-        type="hidden"
-        name="comment[post_id]"
-        id="comment_post_id"
-      />
-      <textarea
-        placeholder="Your comment goes here"
-        class="form-control"
-        name="comment[message]"
-        id="comment_message"
-      ></textarea>
-      <input
-        type="submit"
-        name="commit"
-        value="Submit comment"
-        class="btn btn-success mt-3"
-        data-disable-with="Submit comment"
-      />
-    </form>
+    <%= live_render(@conn, RedditWeb.CommentsLive, session: %{"post" => @post, "user_id" => @current_user.id}) %>
   </div>
 </div>
 

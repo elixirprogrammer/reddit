@@ -102,5 +102,4 @@ defmodule Reddit.Community do
   def change_post(%Post{} = post, attrs \\ %{}) do
     Post.changeset(post, attrs)
   end
-
 end

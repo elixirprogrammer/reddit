@@ -1,0 +1,24 @@
+<div id="comments" phx-update="append">
+    <%= for comment <- @comments do %>
+        <div class="comment" id="<%= comment.id %>">
+            <%= live_patch comment.user.full_name, to: Routes.user_path(@socket, :profile, comment.user.username) %>
+            <p><%= comment.body %></p>
+        </div>
+    <% end %>
+</div>
+
+
+<h5>Leave a comment</h5>
+
+<%= f = form_for @changeset, "#",
+  phx_submit: "save" %>
+
+  <%= textarea f, :body, class: "form-control" %>
+  <%= error_tag f, :body %>
+
+  <%= hidden_input f, :u_id, value: @u_id %>
+  <%= hidden_input f, :p_id, value: @p_id %>
+
+  <%= submit "Submit Comment", class: "btn btn-success mt-3",
+    phx_disable_with: "Saving..." %>
+</form>
