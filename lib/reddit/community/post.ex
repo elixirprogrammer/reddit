@@ -5,6 +5,7 @@ defmodule Reddit.Community.Post do
   alias Reddit.Category.Community
   alias Reddit.Users.User
   alias Reddit.Comments.Comment
+  alias Reddit.Votes.Vote
 
   schema "posts" do
     field :body, :string
@@ -15,6 +16,7 @@ defmodule Reddit.Community.Post do
     belongs_to :community, Community
     belongs_to :user, User
     has_many :comments, Comment
+    has_many :votes, Vote
 
     timestamps()
   end

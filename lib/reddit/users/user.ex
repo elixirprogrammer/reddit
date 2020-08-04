@@ -13,6 +13,7 @@ defmodule Reddit.Users.User do
   alias Reddit.Community.Subscription
   alias Reddit.Community.Post
   alias Reddit.Comments.Comment
+  alias Reddit.Votes.Vote
 
   schema "users" do
     pow_user_fields()
@@ -25,6 +26,7 @@ defmodule Reddit.Users.User do
     has_many :subscriptions, Subscription
     has_many :posts, Post
     has_many :comments, Comment
+    has_many :votes, Vote
 
     timestamps()
   end
