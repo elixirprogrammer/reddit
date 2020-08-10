@@ -9,8 +9,10 @@ defmodule RedditWeb.PostController do
   alias Reddit.Repo
 
   def show(conn, %{"id" => id}) do
+    logged_in_user_id = logged_in(conn.assigns.current_user)
+
     post = CommunityPost.get_post!(id) |> Repo.preload([:community, :comments])
-    render(conn, :show, post: post, community: post.community)
+    render(conn, :show, post: post, community: post.community, logged_in_user_id: logged_in_user_id)
   end
 
   def new(conn, %{"community_id" => community_id}) do
@@ -33,6 +35,15 @@ defmodule RedditWeb.PostController do
 
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, "new.html", changeset: changeset, community_id: community_id)
+    end
+  end
+
+  defp logged_in(current_user) do
+    case current_user do
+      nil ->
+        false
+      current_user ->
+        current_user.id
     end
   end
 end

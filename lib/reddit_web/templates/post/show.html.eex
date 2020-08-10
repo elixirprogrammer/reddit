@@ -1,9 +1,7 @@
 <div class="row">
   <div class="col-1 text-center">
-    <div id="vote-actions-1" class="vote" data-id="1">
-      <div class="fa fa-arrow-up upvote"></div>
-      <span class="font-weight-bold score">3</span>
-      <div class="fa fa-arrow-down downvote"></div>
+    <div class="vote">
+      <%= live_render(@conn, RedditWeb.VotesLive, session: %{"post_id" => @post.id, "user_id" => @logged_in_user_id}) %>
     </div>
   </div>
   <div class="col-11">
@@ -11,7 +9,7 @@
 
     <%= text_to_html(@post.body, [wrapper_tag: :p]) %>
 
-    <%= live_render(@conn, RedditWeb.CommentsLive, session: %{"post" => @post, "user_id" => @current_user.id}) %>
+    <%= live_render(@conn, RedditWeb.CommentsLive, session: %{"post" => @post, "user_id" => @logged_in_user_id}) %>
   </div>
 </div>
 

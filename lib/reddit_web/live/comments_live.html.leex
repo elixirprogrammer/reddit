@@ -8,17 +8,23 @@
 </div>
 
 
-<h5>Leave a comment</h5>
+<%= if @u_id do %>
+    <h5>Leave a comment</h5>
+    <%= f = form_for @changeset, "#",
+    phx_submit: "save" %>
 
-<%= f = form_for @changeset, "#",
-  phx_submit: "save" %>
+    <%= textarea f, :body, class: "form-control" %>
+    <%= error_tag f, :body %>
 
-  <%= textarea f, :body, class: "form-control" %>
-  <%= error_tag f, :body %>
+    <%= hidden_input f, :u_id, value: @u_id %>
+    <%= hidden_input f, :p_id, value: @p_id %>
 
-  <%= hidden_input f, :u_id, value: @u_id %>
-  <%= hidden_input f, :p_id, value: @p_id %>
+    <%= submit "Submit Comment", class: "btn btn-success mt-3",
+        phx_disable_with: "Saving..." %>
+    </form>
+<% else %>
+    <h5>Please Login To Leave A Comment!</h5>
+    <%= live_patch "Sign in", to: Routes.pow_session_path(@socket, :new), class: "btn btn-outline-primary" %>
 
-  <%= submit "Submit Comment", class: "btn btn-success mt-3",
-    phx_disable_with: "Saving..." %>
-</form>
+    <%= live_patch "Register", to: Routes.pow_registration_path(@socket, :new), class: "btn btn-primary" %>
+<% end %>

@@ -2,7 +2,7 @@ defmodule Reddit.Votes do
   @moduledoc """
   The Votes context.
   """
-
+  import Ecto
   import Ecto.Query, warn: false
   alias Reddit.Repo
 
@@ -49,9 +49,9 @@ defmodule Reddit.Votes do
       {:error, %Ecto.Changeset{}}
 
   """
-  def create_vote(attrs \\ %{}) do
-    %Vote{}
-    |> Vote.changeset(attrs)
+  def create_vote(user, post, vote) do
+    v = Ecto.build_assoc(user, :votes, vote)
+    Ecto.build_assoc(post, :votes, v)
     |> Repo.insert()
   end
 
@@ -100,5 +100,9 @@ defmodule Reddit.Votes do
   """
   def change_vote(%Vote{} = vote, attrs \\ %{}) do
     Vote.changeset(vote, attrs)
+  end
+
+  def find_vote(user_id, post_id) do
+    Vote |> Repo.get_by(user_id: user_id, post_id: post_id)
   end
 end

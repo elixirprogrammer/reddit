@@ -3,6 +3,7 @@ defmodule Reddit.Community do
   The Community context.
   """
   import Ecto
+  import Ecto.Query, only: [from: 2]
   import Ecto.Query, warn: false
   alias Reddit.Repo
 
@@ -102,4 +103,16 @@ defmodule Reddit.Community do
   def change_post(%Post{} = post, attrs \\ %{}) do
     Post.changeset(post, attrs)
   end
+
+  def votes_count(post) do
+    post
+    |> assoc(:votes)
+    |> Repo.aggregate(:count, :user_id)
+  end
+
+  def votes_count_update(post_id, count) do
+    from(p in Post, update: [inc: [votes_count: ^count]], where: p.id == ^post_id)
+    |> Repo.update_all([])
+  end
+
 end

@@ -10,9 +10,7 @@ defmodule Reddit.Community.Post do
   schema "posts" do
     field :body, :string
     field :title, :string
-    field :upvotes, :integer, default: 0
-    field :downvotes, :integer, default: 0
-    field :comments_count, :integer, default: 0
+    field :votes_count, :integer, default: 0
     belongs_to :community, Community
     belongs_to :user, User
     has_many :comments, Comment
