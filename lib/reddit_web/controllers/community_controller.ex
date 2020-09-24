@@ -36,12 +36,13 @@ defmodule RedditWeb.CommunityController do
 
   def show(conn, %{"name" => name}) do
     posts = Post.list_posts()
+    logged_in_user_id = logged_in(conn.assigns.current_user)
 
     case Repo.get_by(Community, name: name) do
       nil ->
         redirect(conn, to: "/")
       community ->
-        render(conn, "show.html", community: community, posts: posts)
+        render(conn, "show.html", community: community, posts: posts, logged_in_user_id: logged_in_user_id)
     end
   end
 
@@ -72,5 +73,14 @@ defmodule RedditWeb.CommunityController do
     conn
     |> put_flash(:info, "Community deleted successfully.")
     |> redirect(to: Routes.community_path(conn, :index))
+  end
+
+  defp logged_in(current_user) do
+    case current_user do
+      nil ->
+        false
+      current_user ->
+        current_user.id
+    end
   end
 end

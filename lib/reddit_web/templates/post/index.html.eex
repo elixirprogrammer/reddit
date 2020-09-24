@@ -3,9 +3,7 @@
     <div class="row">
       <div class="col-1 text-center">
         <div class="vote">
-          <div class="fa fa-arrow-up upvote"></div>
-          <span class="font-weight-bold score"><%= post.votes_count %></span>
-          <div class="fa fa-arrow-down downvote"></div>
+          <%= live_render(@conn, RedditWeb.VotesLive, session: %{"post_id" => post.id, "user_id" => @logged_in_user_id}) %>
         </div>
       </div>
       <div class="col-11">
