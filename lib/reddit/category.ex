@@ -21,6 +21,11 @@ defmodule Reddit.Category do
     Repo.all(Community)
   end
 
+  def list_communities_names do
+    query = from c in Community, select: c.name, order_by: [asc: c.name]
+    Repo.all(query)
+  end
+
   @doc """
   Gets a single community.
 

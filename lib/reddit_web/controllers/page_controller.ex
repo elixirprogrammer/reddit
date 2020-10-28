@@ -14,7 +14,7 @@ defmodule RedditWeb.PageController do
 ###  end
 
   def index(conn, _params) do
-    communities = Category.list_communities()
+    communities = Category.list_communities_names()
     posts = Post.list_popular_posts()
     logged_in_user_id = logged_in(conn.assigns.current_user)
     render conn, :index, communities: communities, posts: posts, logged_in_user_id: logged_in_user_id

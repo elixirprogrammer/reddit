@@ -42,7 +42,7 @@
       <ul class="list-group list-group-flush">
         <%= for community <- @communities do %>
           <li class="list-group-item">
-            <%= link community.name, to: Routes.community_path(@conn, :show, community.name) %>
+            <%= link community, to: Routes.community_path(@conn, :show, community) %>
           </li>
         <% end %>
       </ul>
