@@ -35,13 +35,13 @@ defmodule RedditWeb.CommunityController do
   end
 
   def show(conn, %{"name" => name}) do
-    posts = Post.list_posts()
     logged_in_user_id = logged_in(conn.assigns.current_user)
 
     case Repo.get_by(Community, name: name) do
       nil ->
         redirect(conn, to: "/")
       community ->
+        posts = Post.list_posts_by_communties(community.id)
         render(conn, "show.html", community: community, posts: posts, logged_in_user_id: logged_in_user_id)
     end
   end

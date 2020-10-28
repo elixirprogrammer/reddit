@@ -22,6 +22,11 @@ defmodule Reddit.Community do
     Repo.all(Post) |> Repo.preload([:user, :community])
   end
 
+  def list_posts_by_communties(c_id) do
+    query = from p in Post, where: p.community_id == ^c_id
+    Repo.all(query) |> Repo.preload([:user, :community])
+  end
+
   def list_popular_posts do
     query = from p in Post, order_by: [desc: :votes_count], limit: 5
     Repo.all(query) |> Repo.preload([:user, :community])
