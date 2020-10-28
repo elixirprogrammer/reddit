@@ -22,6 +22,11 @@ defmodule Reddit.Community do
     Repo.all(Post) |> Repo.preload([:user, :community])
   end
 
+  def list_popular_posts do
+    query = from p in Post, order_by: [desc: :votes_count], limit: 5
+    Repo.all(query) |> Repo.preload([:user, :community])
+  end
+
   @doc """
   Gets a single post.
 
