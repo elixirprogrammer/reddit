@@ -63,18 +63,11 @@
 
     <div class="card">
       <ul class="list-group list-group-flush">
-        <li class="list-group-item">
-          <a href="/communities/1">Ruby on Rails Community</a>
-        </li>
-        <li class="list-group-item">
-          <a href="/communities/2">Memes</a>
-        </li>
-        <li class="list-group-item">
-          <a href="/communities/3">Introduce Yourself</a>
-        </li>
-        <li class="list-group-item">
-          <a href="/communities/4">fake community</a>
-        </li>
+        <%= for community <- @communities do %>
+          <li class="list-group-item">
+            <%= link community.name, to: Routes.community_path(@conn, :show, community.name) %>
+          </li>
+        <% end %>
       </ul>
     </div>
 
