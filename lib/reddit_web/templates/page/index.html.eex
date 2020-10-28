@@ -5,58 +5,35 @@
 </div>
 <div class="row">
   <div class="col-8">
-    <div class="card p-3 mb-3">
-      <div class="row">
-        <div class="col-1 text-center">
-          <div id="vote-actions-1" class="vote" data-id="1">
-            <div class="fa fa-arrow-up upvote"></div>
-            <span class="font-weight-bold score">2</span>
-            <div class="fa fa-arrow-down downvote"></div>
+    <%= for post <- @posts do %>
+      <div class="card p-3 mb-3">
+        <div class="row">
+          <div class="col-1 text-center">
+            <div class="vote">
+              <%= if Pow.Plug.current_user(@conn) do %>
+                <%= live_render(@conn, RedditWeb.VotesLive, session: %{"post_id" => post.id, "user_id" => @logged_in_user_id}) %>
+              <% else %>
+                <%= render RedditWeb.PostView, "votes_live.html", post_count: post.votes_count %>
+              <% end %>
+            </div>
+          </div>
+          <div class="col-11">
+            <h4 class="mb-1">
+              <%= link post.title, to: Routes.post_path(@conn, :show, post.community.name, post.id) %>
+            </h4>
+            <p>
+                <small>
+                    <%= link post.community.name, to: Routes.community_path(@conn, :show, post.community.name) %> Posted by
+                    <%= link post.user.full_name, to: Routes.user_path(@conn, :profile, post.user.username) %> <%= Timex.from_now(post.inserted_at) %>
+                </small>
+            </p>
+            <p>
+              <%= post.body %>
+            </p>
           </div>
         </div>
-        <div class="col-11">
-          <h4 class="mb-1">
-            <a href="/communities/1/posts/1">Webpackets vs Sprockets</a>
-          </h4>
-          <p>
-            <small
-              ><a href="/communities/1">Ruby on Rails Community</a> Posted by
-              <a href="/u/davidb">David Battersby</a> about 2 months ago.</small
-            >
-          </p>
-          <p>
-            Watch my video on adding Sprockets to a Rails 6 app. This can be
-            helpful if you are upgrading an older app and want to work with the
-            existing asset pipeline. https://www.youtube.com/watch?v=S-1x...
-          </p>
-        </div>
       </div>
-    </div>
-    <div class="card p-3 mb-3">
-      <div class="row">
-        <div class="col-1 text-center">
-          <div id="vote-actions-2" class="vote" data-id="2">
-            <div class="fa fa-arrow-up upvote"></div>
-            <span class="font-weight-bold score">0</span>
-            <div class="fa fa-arrow-down downvote"></div>
-          </div>
-        </div>
-        <div class="col-11">
-          <h4 class="mb-1">
-            <a href="/communities/3/posts/2">Hi, I&#39;m John</a>
-          </h4>
-          <p>
-            <small
-              ><a href="/communities/3">Introduce Yourself</a> Posted by
-              <a href="/u/johnsmith">John Smith</a> about 2 months ago.</small
-            >
-          </p>
-          <p>
-            Nice to meet you all. Thanks for letting me join this community!
-          </p>
-        </div>
-      </div>
-    </div>
+    <% end %>
   </div>
   <div class="col-4">
     <p class="h5 mb-4">Up and coming Communities</p>

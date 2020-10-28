@@ -3,7 +3,11 @@
     <div class="row">
       <div class="col-1 text-center">
         <div class="vote">
-          <%= live_render(@conn, RedditWeb.VotesLive, session: %{"post_id" => post.id, "user_id" => @logged_in_user_id}) %>
+          <%= if Pow.Plug.current_user(@conn) do %>
+            <%= live_render(@conn, RedditWeb.VotesLive, session: %{"post_id" => post.id, "user_id" => @logged_in_user_id}) %>
+          <% else %>
+            <%= render RedditWeb.PostView, "votes_live.html", post_count: post.votes_count %>
+          <% end %>
         </div>
       </div>
       <div class="col-11">
