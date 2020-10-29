@@ -7,6 +7,6 @@
       <%= @user.bio %>
     </p>
 
-    <p>Karma: <%= @current_user.karma %> <span class="fa fa-star text-warning"></span></p>
+    <p>Karma: <%= @user.karma %> <span class="fa fa-star text-warning"></span></p>
     <p>Cake day: <%= inserted_at(@user.inserted_at) %>
 </div>
