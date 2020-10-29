@@ -48,7 +48,7 @@ defmodule Reddit.Users.User do
   end
 
   def profile(param) do
-    Repo.get_by(User, username: param)
+    Repo.get_by(User, username: param) |> Repo.preload([:posts])
   end
 
   def karma_update(user_id, k) do

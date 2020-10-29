@@ -32,6 +32,11 @@ defmodule Reddit.Community do
     Repo.all(query) |> Repo.preload([:user, :community])
   end
 
+  def list_posts_by_users(u_id) do
+    query = from p in Post, where: p.user_id == ^u_id
+    Repo.all(query) |> Repo.preload([:user, :community])
+  end
+
   @doc """
   Gets a single post.
 
